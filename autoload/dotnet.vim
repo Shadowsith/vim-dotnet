@@ -10,14 +10,9 @@ function dotnet#Exists()
 endfunction
 
 let g:add_sln = "!dotnet new sln"
-function dotnet#NewSln(args)
+function dotnet#NewSln()
     if dotnet#Exists()
-        let l:path = strpart(a:args, 1, strlen(a:args)-2)
-        if l:path == ""
-            execute g:add_sln
-        else 
-            execute g:add_sln . " " . l:path 
-        endif
+        execute g:add_sln
     else
         echoerr g:err
     endif
