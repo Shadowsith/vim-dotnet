@@ -23,8 +23,11 @@ function dotnet#NewSln(args)
     endif
 endfunction
 
+"function dotnet#Add
+
 function dotnet#HandleCmd(args)
     if dotnet#Exists() 
+        let a:args = strpart(a:args, 1, strlen(a:args)-2)
         let argList = split(a:args, " ")
         "echo get(argList, 0)
         echo get(argList, 1)
