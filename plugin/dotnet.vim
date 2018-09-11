@@ -1,5 +1,10 @@
-command! -nargs=* Dotnet call dotnet#HandleCmd(string(<q-args>))
 
+" register dotnet simple commands
+command! -buffer DotnetBuild call dotnet#Cmd("build")
+command! -buffer DotnetRun call dotnet#Cmd("run")
+
+
+" register dotnet new commands
 command! -nargs=* -complete=dir DotnetNewSln call dotnet#New("sln",string(<q-args>))
 command! -nargs=* -complete=dir DotnetNewConsole call dotnet#New("console",string(<q-args>))
 command! -nargs=* -complete=dir DotnetNewClassLib call dotnet#New("classlib",string(<q-args>))
@@ -21,4 +26,8 @@ command! -nargs=* -complete=dir DotnetNewASPCoreWebAPI call dotnet#New("webapi",
 command! -nargs=* -complete=dir DotnetNewWebConfig call dotnet#New("webconfig",string(<q-args>))
 command! -nargs=* -complete=dir DotnetNewNuGet call dotnet#New("nugetconfig",string(<q-args>))
 command! -nargs=* -complete=dir DotnetNewJSON call dotnet#New("globaljson",string(<q-args>))
+
+" register dotnet sln commands
+command! -nargs=* -complete=file DotnetSlnAdd call dotnet#Sln("add",string(<q-args>))
+command! -nargs=* -complete=file DotnetSlnRemove call dotnet#Sln("remove",string(<q-args>))
 

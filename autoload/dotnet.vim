@@ -30,16 +30,33 @@ function dotnet#New(file_type, args)
     endif
 endfunction
 
-"function dotnet#Add
-
-function dotnet#HandleCmd(args)
-    if dotnet#Exists() 
-        let a:args = strpart(a:args, 1, strlen(a:args)-2)
-        let argList = split(a:args, " ")
-        "echo get(argList, 0)
-        echo get(argList, 1)
-        "echo argList
+" for simple commands
+function dotnet#Cmd(cmd)
+    if dotnet#Exists()
+        let l:dotnet_cmd = "!dotnet " . a:cmd
+        execute l:dotnet_cmd 
     else
         echoerr g:err
+    endif
+endfunction
+
+function dotnet#Sln(cmd, path)
+    if dotnet#Exists()
+        let l:dotnet_cmd = "!dotnet sln " . a:cmd
+        let l:path = "./" . strpart(a:path, 1, strlen(a:path)-2)
+        "echo a:cmd . " " . l:path
+        if l:path == "./"
+            if a:cmd == "add" || a:cmd == "remove"
+                echoerr "Please enter the path + .csproj file as argument"
+            else
+                execute l:dotnet_cmd 
+            endif
+        else
+            if a:cmd == "add" || a:cmd == "remove"
+                execute l:dotnet_cmd . " " . l:path
+            else
+                execute l:dotnet_cmd
+            endif
+        endif
     endif
 endfunction
