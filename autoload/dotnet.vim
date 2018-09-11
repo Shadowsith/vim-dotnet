@@ -9,10 +9,22 @@ function dotnet#Exists()
     endif
 endfunction
 
-let g:add_sln = "!dotnet new sln"
-function dotnet#NewSln()
+function dotnet#AddNew(add_cmd, path)
+    let curr_path = system("pwd")
+    execute "cd " . a:path 
+    execute a:add_cmd
+    execute "cd " . curr_path
+endfunction
+
+function dotnet#New(file_type, args)
+    let l:add_file = "!dotnet new " . a:file_type
     if dotnet#Exists()
-        execute g:add_sln
+        let l:path = "./" . strpart(a:args, 1, strlen(a:args)-2)
+        if l:path == "./"
+            execute l:add_file
+        else 
+            call dotnet#AddNew(l:add_file, l:path)
+        endif
     else
         echoerr g:err
     endif
