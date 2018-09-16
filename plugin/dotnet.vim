@@ -1,7 +1,18 @@
 
 " register dotnet simple commands
+command! -buffer DotnetClean call dotnet#Cmd("clean")
 command! -buffer DotnetBuild call dotnet#Cmd("build")
+command! -buffer DotnetBuildServer call dotnet#Cmd("build-server shutdown")
 command! -buffer DotnetRun call dotnet#Cmd("run")
+command! -buffer DotnetPack call dotnet#Cmd("pack")
+
+" register dotnet advanced commands
+command! -buffer -complete=file DotnetList cal dotnet#CmdRef("list",string(<q-args>))
+
+
+" register dotnet add commands
+command! -nargs=* DotnetAddPkg call dotnet#Add("package",string(<q-args>))
+command! -nargs=* -complete=dir DotnetAddRef call dotnet#Add("reference",string(<q-args>))
 
 
 " register dotnet new commands
@@ -30,4 +41,5 @@ command! -nargs=* -complete=dir DotnetNewJSON call dotnet#New("globaljson",strin
 " register dotnet sln commands
 command! -nargs=* -complete=file DotnetSlnAdd call dotnet#Sln("add",string(<q-args>))
 command! -nargs=* -complete=file DotnetSlnRemove call dotnet#Sln("remove",string(<q-args>))
+command! -nargs=* -complete=file DotnetSlnList call dotnet#Sln("list",string(<q-args>))
 
