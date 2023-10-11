@@ -5,7 +5,7 @@ Run commands from dotnet-cli directly from vim
 
 ### Adding new solution and project files
 * <code>:DotnetNewSln</code> - adds an empty solution file to dir where vim is
-  openened
+  opened
 
 
 ### Build and Run
