@@ -7,8 +7,7 @@ command! -buffer DotnetRun call dotnet#Cmd("run")
 command! -buffer DotnetPack call dotnet#Cmd("pack")
 
 " register dotnet advanced commands
-command! -buffer -complete=file DotnetList call dotnet#CmdRef("list",string(<q-args>))
-
+command! -buffer -complete=file -nargs=* DotnetList call dotnet#CmdRef("list", <q-args>)
 
 " register dotnet add commands
 command! -nargs=* DotnetAddPkg call dotnet#Add("package",string(<q-args>))
